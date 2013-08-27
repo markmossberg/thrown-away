@@ -9,10 +9,9 @@
 	<h1>thrown-away</h1>
 	<form>
 		<ul id="input_list">
-			<li><input type="text" id="name0" placeholder="usr"/></li>
-			<li><input type="text" id="name1" placeholder="usr"/></li>
+			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
+			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
 		</ul>
-		<!--<button onclick="main()">submit</button>-->
 		<input type="button" value="add row" onclick="add_row()"/>
 		<input type="button" value="submit" onclick="main()"/>
 	</form>
@@ -20,13 +19,21 @@
 	</div>
 	<script type="text/python">
 		def main():
+			usernames = get_usernames()
+			print(usernames)
+
 
 		def add_row():
-			list_str = '<li><input type="text" id="name" placeholder="usr"/></li>'
+			list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>'
 			doc['input_list'].html += list_str
 
 		def get_usernames():
-			pass
+			usernames = []
+			inputs = doc.get(name="name")
+			for input in inputs:
+				usernames.append(input.value)
+			return usernames
+
 	</script>
 </body>
 </html>
