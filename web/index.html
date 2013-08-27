@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="iso-8859-1">
+	<title>thrown-away</title>
+	<script src="../../src/brython.js"></script>
+</head>
+<body onLoad="brython()">
+	<h1>thrown-away</h1>
+	<form>
+		<ul>
+			<li><input type="text" name="name1" id="name1" placeholder="usr"/></li>
+			<li><input type="text" name="name2" id="name2" placeholder="usr"/></li>
+		</ul>
+		<!--<button onclick="main()">submit</button>-->
+		<input type="button" name="submit" id="submit" value="submit" onclick="main()"/>
+	</form>
+	<div id="output">
+		fuck
+	</div>
+	<script type="text/python">
+		def main():
+			doc['output'] <= "ho"
+			doc <= "hi"
+			print("hsdf")
+			print(doc['output'].html)
+	</script>
+</body>
+</html>
