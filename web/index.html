@@ -8,22 +8,25 @@
 <body onLoad="brython()">
 	<h1>thrown-away</h1>
 	<form>
-		<ul>
-			<li><input type="text" name="name1" id="name1" placeholder="usr"/></li>
-			<li><input type="text" name="name2" id="name2" placeholder="usr"/></li>
+		<ul id="input_list">
+			<li><input type="text" id="name0" placeholder="usr"/></li>
+			<li><input type="text" id="name1" placeholder="usr"/></li>
 		</ul>
 		<!--<button onclick="main()">submit</button>-->
-		<input type="button" name="submit" id="submit" value="submit" onclick="main()"/>
+		<input type="button" value="add row" onclick="add_row()"/>
+		<input type="button" value="submit" onclick="main()"/>
 	</form>
 	<div id="output">
-		fuck
 	</div>
 	<script type="text/python">
 		def main():
-			doc['output'] <= "ho"
-			doc <= "hi"
-			print("hsdf")
-			print(doc['output'].html)
+
+		def add_row():
+			list_str = '<li><input type="text" id="name" placeholder="usr"/></li>'
+			doc['input_list'].html += list_str
+
+		def get_usernames():
+			pass
 	</script>
 </body>
 </html>
