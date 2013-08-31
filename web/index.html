@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="iso-8859-1">
 	<title>thrown-away</title>
 	<script src="../../src/brython.js"></script>
 </head>
-<body onLoad="brython()">
+<body onLoad="brython()" id="bod">
 	<h1>thrown-away</h1>
 	<form>
 		<ul id="input_list">
@@ -14,26 +13,17 @@
 		</ul>
 		<input type="button" value="add row" onclick="add_row()"/>
 		<input type="button" value="submit" onclick="main()"/>
+		<input type="button" value="test" onclick="test()"/>
 	</form>
 	<div id="output">
 	</div>
-	<script type="text/python">
-		def main():
-			usernames = get_usernames()
-			print(usernames)
-
-
-		def add_row():
-			list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>'
-			doc['input_list'].html += list_str
-
-		def get_usernames():
-			usernames = []
-			inputs = doc.get(name="name")
-			for input in inputs:
-				usernames.append(input.value)
-			return usernames
-
+	<script type="text/python" src="script.py"></script>
+	<script type="text/javascript" charset="utf-8">
+		// super hacky getter function so brython can access json
+		function callback(reddit_data){
+			req = reddit_data;
+		}
 	</script>
+	<!-- <script src="http://www.reddit.com/user/mmosskicker/about.json?jsonp=callback"></script> -->
 </body>
 </html>
