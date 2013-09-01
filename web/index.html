@@ -15,7 +15,7 @@
 		</ul>
 		<input type="button" value="add row" onclick="add_row()"/>
 		<input type="button" value="submit" onclick="main()"/>
-		<input type="button" value="test" onclick="test()"/>
+		<input type="button" value="process" onclick="process()"/>
 		<input type="button" value="populate" onclick="populate()"/>
 	</form>
 	<div id="output">
@@ -27,10 +27,6 @@
 			print(usernames)
 			for user in usernames:
 				add_tag(user)
-			#reddit_data = JSObject(req)
-
-			#karma_total = 0
-			#print(reddit_data)
 
 		def add_row():
 			list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>'
@@ -46,15 +42,12 @@
 					usernames.append(input.value)
 			return usernames
 
-		def test():
+		def process():
 			total_link = 0
 			total_comment = 0
 
 			data = JSObject(req)
 			users = [usr for usr in dict(data)]
-			#print(dict(data)[users[0]])
-			#mmoss = JSObject(dict(data)[users[0]])
-			#print(JSObject(dict(data)[users[0]]).data.name)
 			for user in users:
 				obj = JSObject(dict(data)[user]).data
 				link = obj.link_karma
@@ -64,12 +57,12 @@
 
 			print(total_comment)
 			print(total_link)
+			#return total_link, total_comment
+			output(total_link, total_comment)
 
-		def get_sum(usernames):
-			karma_total = 0
-			data = JSObject(req)
-			for user in usernames:
-				karma_total += data[]
+		def output(total_link, total_comment):
+			doc['output'].html += "<p>" + str(total_link) + "</p>"
+			doc['output'].html += "<p>" + str(total_comment) + "</p>"
 
 		def populate(): # for debugging
 			doc.get(name="name")[0].value = "mmosskicker"
@@ -96,14 +89,6 @@
 	    	head.appendChild(script);
 	    }
 
-	    function proc(){
-	    	for (var a in req){
-	    		console.log(req[a]);
-	    	}
-	    }
-
-	    // add_tag('mmosskicker');
-	    // add_tag('yten');
 	</script>
 
 	<!-- <script src="http://www.reddit.com/user/mmosskicker/about.json?jsonp=callback"></script> -->
