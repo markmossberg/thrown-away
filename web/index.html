@@ -28,10 +28,6 @@
 			for user in usernames:
 				add_tag(user)
 
-		def add_row():
-			list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>'
-			doc['input_list'].html += list_str
-
 		def get_usernames():
 			usernames = []
 			inputs = doc.get(name="name")
@@ -55,14 +51,12 @@
 				total_link += link
 				total_comment += comment
 
-			print(total_comment)
-			print(total_link)
-			#return total_link, total_comment
 			output(total_link, total_comment)
 
 		def output(total_link, total_comment):
-			doc['output'].html += "<p>" + str(total_link) + "</p>"
-			doc['output'].html += "<p>" + str(total_comment) + "</p>"
+			out_str = "<p>Total Link: " + str(total_link) + "</p>"
+			out_str += "<p>Total Comment: " + str(total_comment) + "</p>"
+			doc['output'].html = out_str
 
 		def populate(): # for debugging
 			doc.get(name="name")[0].value = "mmosskicker"
@@ -73,7 +67,6 @@
 	<script type="text/javascript" charset="utf-8">
 		var req = {};
 
-		// super hacky getter function so brython can access json
 		function callback(reddit_data){
 			console.log(reddit_data.data.name);
 			var name = reddit_data.data.name;
@@ -87,6 +80,19 @@
 	    	script.type= 'text/javascript';
 	    	script.src= 'http://www.reddit.com/user/' + user + '/about.json?jsonp=callback';
 	    	head.appendChild(script);
+	    }
+
+	    function add_row(){
+	    	var list = document.getElementsByTagName('ul')[0];
+	    	list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>';
+	    	var li = document.createElement('li');
+	    	var inp = document.createElement('input');
+	    	inp.type = "text";
+	    	inp.name = "name";
+	    	inp.id = "name";
+	    	inp.placeholder = "usr";
+	    	li.appendChild(inp);
+	    	list.appendChild(li);
 	    }
 
 	</script>
