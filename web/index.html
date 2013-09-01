@@ -1,24 +1,61 @@
 <!DOCTYPE HTML>
 <html>
-<head id="hed">
+<head>
 	<title>thrown-away</title>
 	<script src="../../src/brython.js"></script>
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+
+		#container {
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+
+		#instr {
+			position: fixed;
+			bottom: 10px;
+			left: 30px;
+		}
+
+		ul {
+			list-style-type: none;
+		}
+
+		input[type=text] {
+			border: 1px solid lightblue;
+			text-align: center;
+			border-radius: 5px;
+			outline: none;
+			width: 20em;
+		}
+
+	</style>
 	
 </head>
 <body onLoad="brython()">
-	<h1>thrown-away</h1>
-	<form>
-		<ul id="input_list">
-			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
-			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
-			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
-		</ul>
-		<input type="button" value="add row" onclick="add_row()"/>
-		<input type="button" value="submit" onclick="main()"/>
-		<input type="button" value="process" onclick="process()"/>
-		<input type="button" value="populate" onclick="populate()"/>
-	</form>
-	<div id="output">
+	<div id="container">
+		<h1>thrown-away</h1>
+		<form>
+			<ul id="input_list">
+				<li><input type="text" name="name" id="name" placeholder="username"/></li>
+				<li><input type="text" name="name" id="name" placeholder="username"/></li>
+				<li><input type="text" name="name" id="name" placeholder="username"/></li>
+			</ul>
+			<input type="button" value="add row" onclick="add_row()"/>
+			<input type="button" value="submit" onclick="main()"/>
+			<input type="button" value="process" onclick="process()"/>
+			<input type="button" value="example" onclick="populate()"/>
+			<input type="button" value="clear" onclick="clear_()"/>
+		</form>
+		<div id="output">
+		</div>
+	</div>
+	<div id="instr">
+		<h2>Instructions:</h2>
+		<p>Enter in your reddit usernames in each field. Click the 'submit' button, then the 'process' button.</p>
 	</div>
 	
 	<script type="text/python">
@@ -59,11 +96,17 @@
 			doc['output'].html = out_str
 
 		def populate(): # for debugging
-			doc.get(name="name")[0].value = "mmosskicker"
-			doc.get(name="name")[1].value = "yten"
+			doc.get(name="name")[0].value = "Shitty_Watercolour"
+			doc.get(name="name")[1].value = "awildsketchappeared"
 			doc.get(name="name")[2].value = "mepper"
 
+		def clear_():
+			for field in doc.get(name="name"):
+				field.value = ''
+			doc['output'].html = ''
+
 	</script>
+
 	<script type="text/javascript" charset="utf-8">
 		var req = {};
 
@@ -84,19 +127,16 @@
 
 	    function add_row(){
 	    	var list = document.getElementsByTagName('ul')[0];
-	    	list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>';
 	    	var li = document.createElement('li');
 	    	var inp = document.createElement('input');
 	    	inp.type = "text";
 	    	inp.name = "name";
 	    	inp.id = "name";
-	    	inp.placeholder = "usr";
+	    	inp.placeholder = "username";
 	    	li.appendChild(inp);
 	    	list.appendChild(li);
 	    }
 
 	</script>
-
-	<!-- <script src="http://www.reddit.com/user/mmosskicker/about.json?jsonp=callback"></script> -->
 </body>
 </html>
