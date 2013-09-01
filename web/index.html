@@ -11,10 +11,12 @@
 		<ul id="input_list">
 			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
 			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
+			<li><input type="text" name="name" id="name" placeholder="usr"/></li>
 		</ul>
 		<input type="button" value="add row" onclick="add_row()"/>
 		<input type="button" value="submit" onclick="main()"/>
 		<input type="button" value="test" onclick="test()"/>
+		<input type="button" value="populate" onclick="populate()"/>
 	</form>
 	<div id="output">
 	</div>
@@ -23,6 +25,12 @@
 		def main():
 			usernames = get_usernames()
 			print(usernames)
+			for user in usernames:
+				add_tag(user)
+			#reddit_data = JSObject(req)
+
+			#karma_total = 0
+			#print(reddit_data)
 
 		def add_row():
 			list_str = '<li><input type="text" name="name" id="name" placeholder="usr"/></li>'
@@ -38,22 +46,30 @@
 					usernames.append(input.value)
 			return usernames
 
-		def on_complete(req):
-			if req.status == 200 or req.status == 0:
-				print(dir(req))
-				print(req.text)
-			else:
-				print("error")
-
 		def test():
+			karma_total = 0
 			data = JSObject(req)
-			print(req)
-			print(req.mmosskicker)
+			users = [usr for usr in dict(data)]
+			print(dict(data)[users[0]])
+			mmoss = JSObject(dict(data)[users[0]])
+			print(mmoss.data.name)
+
+		def get_sum(usernames):
+			karma_total = 0
+			data = JSObject(req)
+			for user in usernames:
+				karma_total += data[]
+
+		def populate(): # for debugging
+			doc.get(name="name")[0].value = "mmosskicker"
+			doc.get(name="name")[1].value = "yten"
+			doc.get(name="name")[2].value = "mepper"
 
 	</script>
 	<script type="text/javascript" charset="utf-8">
-		// super hacky getter function so brython can access json
 		var req = {};
+
+		// super hacky getter function so brython can access json
 		function callback(reddit_data){
 			console.log(reddit_data.data.name);
 			var name = reddit_data.data.name;
@@ -69,12 +85,14 @@
 	    	head.appendChild(script);
 	    }
 
-	    function testing(){
-	    	console.log("FUCKSDFSKDJFAD");
+	    function proc(){
+	    	for (var a in req){
+	    		console.log(req[a]);
+	    	}
 	    }
 
-	    add_tag('mmosskicker');
-	    add_tag('yten');
+	    // add_tag('mmosskicker');
+	    // add_tag('yten');
 	</script>
 
 	<!-- <script src="http://www.reddit.com/user/mmosskicker/about.json?jsonp=callback"></script> -->
